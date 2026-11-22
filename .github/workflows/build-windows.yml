@@ -12,12 +12,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Restore project source
+      - name: Restore project source from uploaded ZIP
         shell: pwsh
         run: |
-          $bytes = [Convert]::FromBase64String((Get-Content motionverse-source.zip.b64 -Raw))
-          [IO.File]::WriteAllBytes("motionverse-source.zip", $bytes)
-          Expand-Archive -Path motionverse-source.zip -DestinationPath app-src -Force
+          if (!(Test-Path "MotionVerse-3D-v0.3.zip")) {
+            throw "Upload MotionVerse-3D-v0.3.zip to the repository root first."
+          }
+          Expand-Archive -Path MotionVerse-3D-v0.3.zip -DestinationPath app-src -Force
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
