@@ -15,10 +15,16 @@ jobs:
       - name: Restore project source from uploaded ZIP
         shell: pwsh
         run: |
-          if (!(Test-Path "MotionVerse-3D-v0.3.zip")) {
-            throw "Upload MotionVerse-3D-v0.3.zip to the repository root first."
+          if (!(Test-Path "MotionVerse-3D-v0.4.zip")) {
+            throw "Upload MotionVerse-3D-v0.4.zip to the repository root first."
           }
-          Expand-Archive -Path MotionVerse-3D-v0.3.zip -DestinationPath app-src -Force
+          Expand-Archive -Path MotionVerse-3D-v0.4.zip -DestinationPath extracted -Force
+          $project = Get-ChildItem extracted -Directory | Select-Object -First 1
+          if (!$project -or !(Test-Path (Join-Path $project.FullName "package.json"))) {
+            throw "The uploaded ZIP does not contain the expected project."
+          }
+          New-Item -ItemType Directory -Force app-src | Out-Null
+          Copy-Item (Join-Path $project.FullName "*") app-src -Recurse -Force
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
