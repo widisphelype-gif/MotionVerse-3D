@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:; img-src 'self' data: blob: https:; media-src 'self' blob:;">
+<title>MotionVerse — Body Outline</title>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><span class="logo">M</span><div><b>MOTIONVERSE</b><small>BODY TRACKING STUDIO</small></div></div><div class="status"><i id="liveDot"></i><span id="topStatus">CÂMERA DESLIGADA</span><em>BETA 0.4</em></div></header>
+<main><section class="intro"><label>COMPUTER VISION / TEMPO REAL</label><h1>Seu corpo.<br><span>Em contorno.</span></h1><p>Ligue a webcam e veja o sistema acompanhar seus movimentos em tempo real.</p></section>
+<section class="layout"><div class="view-card"><div class="view-head"><div><small>01 / VISUALIZAÇÃO</small><h2>Body outline</h2></div><b id="cameraStatus">AGUARDANDO CÂMERA</b></div><div class="view" id="view"><video id="cam" autoplay muted playsinline></video><canvas id="draw"></canvas><div class="placeholder" id="placeholder"><div>◎</div><b>Sua câmera aparecerá aqui</b><span>Fique de frente para a webcam e deixe seu corpo visível.</span></div><small class="view-label">MOTIONVERSE · LIVE VIEW</small></div><div class="view-foot"><span>▣ Vídeo processado localmente no computador</span><span id="fps">POSE TRACKING · OFF</span></div></div>
+<aside class="panel"><small>02 / CONTROLES</small><h2>Central de captura</h2><p>Ative a webcam para começar o rastreamento corporal.</p><button id="start">◎ &nbsp; ATIVAR CÂMERA <b>↗</b></button><button id="stop" class="secondary" disabled>DESLIGAR CÂMERA</button><hr><small>03 / DETECÇÃO DO CORPO</small><div class="metric"><span>◉</span><div><small>ESTADO</small><b id="body">Aguardando</b></div><i id="bodyDot"></i></div><div class="metric"><span>⌁</span><div><small>PONTOS IDENTIFICADOS</small><b id="points">0 pontos</b></div></div><div class="tip"><b>✦ DICA</b><p>Afaste-se para aparecer da cabeça aos pés. Uma boa iluminação ajuda o rastreamento.</p></div><p class="error" id="error"></p></aside></section></main><footer>© 2026 MOTIONVERSE <span>BODY OUTLINE EXPERIMENT</span></footer></div>
+<script type="module" src="/src/main.js"></script>
+</body></html>
