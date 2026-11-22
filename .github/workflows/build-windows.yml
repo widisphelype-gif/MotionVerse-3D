@@ -1,0 +1,37 @@
+name: Build MotionVerse for Windows
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Restore project source
+        shell: pwsh
+        run: |
+          $bytes = [Convert]::FromBase64String((Get-Content motionverse-source.zip.b64 -Raw))
+          [IO.File]::WriteAllBytes("motionverse-source.zip", $bytes)
+          Expand-Archive -Path motionverse-source.zip -DestinationPath app-src -Force
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        working-directory: app-src
+        run: npm install
+      - name: Build Windows EXE
+        working-directory: app-src
+        run: npm run package:win
+      - name: Upload EXE files
+        uses: actions/upload-artifact@v4
+        with:
+          name: MotionVerse-3D-Windows
+          path: app-src/release/*.exe
+          if-no-files-found: error
+          retention-days: 30
