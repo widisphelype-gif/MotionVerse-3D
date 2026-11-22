@@ -1,0 +1,7 @@
+{
+ "name":"motionverse-body-outline","version":"0.4.1","private":true,"description":"MotionVerse webcam body outline tracker","main":"electron/main.cjs",
+ "scripts":{"dev":"vite --host 127.0.0.1","build":"vite build","desktop":"electron .","desktop:dev":"concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"","package:win":"npm run build && electron-builder --win nsis portable"},
+ "dependencies":{"@mediapipe/tasks-vision":"^0.10.22"},
+ "devDependencies":{"concurrently":"^9.2.1","electron":"^38.2.0","electron-builder":"^26.0.12","vite":"^7.1.7","wait-on":"^8.0.4"},
+ "build":{"appId":"com.motionverse.bodyoutline","productName":"MotionVerse Body Outline","artifactName":"${productName}-${version}-${arch}.${ext}","files":["dist/**/*","electron/**/*","package.json"],"win":{"target":["nsis","portable"],"signAndEditExecutable":false},"nsis":{"oneClick":false,"allowToChangeInstallationDirectory":true,"createDesktopShortcut":true,"createStartMenuShortcut":true},"directories":{"output":"release"}}
+}
