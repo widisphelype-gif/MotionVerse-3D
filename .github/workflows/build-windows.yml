@@ -12,33 +12,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Restore project source from uploaded ZIP
-        shell: pwsh
-        run: |
-          if (!(Test-Path "MotionVerse-3D-v0.4.zip")) {
-            throw "Upload MotionVerse-3D-v0.4.zip to the repository root first."
-          }
-          Expand-Archive -Path MotionVerse-3D-v0.4.zip -DestinationPath extracted -Force
-          $project = Get-ChildItem extracted -Directory | Select-Object -First 1
-          if (!$project -or !(Test-Path (Join-Path $project.FullName "package.json"))) {
-            throw "The uploaded ZIP does not contain the expected project."
-          }
-          New-Item -ItemType Directory -Force app-src | Out-Null
-          Copy-Item (Join-Path $project.FullName "*") app-src -Recurse -Force
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install dependencies
-        working-directory: app-src
         run: npm install
-      - name: Build Windows EXE
-        working-directory: app-src
+      - name: Build Windows executables
         run: npm run package:win
       - name: Upload EXE files
         uses: actions/upload-artifact@v4
         with:
-          name: MotionVerse-3D-Windows
-          path: app-src/release/*.exe
+          name: MotionVerse-Body-Outline-Windows
+          path: release/*.exe
           if-no-files-found: error
           retention-days: 30
