@@ -1,16 +1,19 @@
-# MotionVerse 3D
+# MotionVerse — Body Outline
 
-Repositório do aplicativo MotionVerse 3D para Windows 10/11.
+Aplicativo desktop para Windows 10/11 que usa a webcam para reconhecer a pose corporal e desenhar um contorno aproximado em tempo real.
 
-## Gerar os executáveis
+## Executar
+```bash
+npm install
+npm run desktop:dev
+```
 
-1. Baixe o arquivo **MotionVerse-3D-v0.3.zip** disponibilizado na conversa.
-2. Abra este repositório no GitHub e toque em **Add file → Upload files**.
-3. Envie o ZIP para a raiz do repositório, mantendo exatamente o nome `MotionVerse-3D-v0.3.zip`.
-4. Faça commit na branch `main`.
-5. Abra **Actions → Build MotionVerse for Windows → Run workflow**.
-6. Quando terminar, abra a execução e baixe o artefato **MotionVerse-3D-Windows**.
+## Gerar EXE
+```bash
+npm install
+npm run package:win
+```
+Os arquivos serão gerados em `release/`. A primeira inicialização precisa de internet para baixar os modelos MediaPipe. O vídeo é processado localmente e não é enviado para servidores.
 
-O artefato conterá os executáveis Windows produzidos pelo electron-builder (instalador e versão portátil).
-
-A primeira execução do app precisa de internet para carregar os modelos MediaPipe e as fontes externas. O processamento da webcam é local.
+## GitHub Actions
+Abra **Actions → Build MotionVerse for Windows → Run workflow**. Ao concluir, baixe o artefato **MotionVerse-Body-Outline-Windows**.
